@@ -1,11 +1,11 @@
-# Compiled class file
-*.class
-
 # IntelliJ
 .idea
 
 # Android
-*/app
 
 # Gradle
 .gradle
+
+# Build
+/build
+*.class
