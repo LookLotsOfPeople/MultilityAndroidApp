@@ -2,9 +2,11 @@
 .idea
 
 # Android
+local.properties
 
 # Gradle
 .gradle
+/gradle
 
 # Build
 /build
