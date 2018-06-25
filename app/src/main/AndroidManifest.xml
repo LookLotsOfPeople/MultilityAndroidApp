@@ -15,6 +15,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainMenu"/>
+        <activity android:name=".utilities.Calculator"/>
     </application>
 
 </manifest>
