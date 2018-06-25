@@ -1,9 +1,9 @@
 package com.beyondbell.multility.sensors
 
-object AvailableSensorsList {
-    val list = ArrayList<Sensors>()
+import android.hardware.Sensor
 
-    enum class Sensors(val check: Boolean, val init: Unit) {
-        // TODO Populate
-    }
+object AvailableSensorsList {
+    val list = ArrayList<Sensors>() //Sensor before, threw error in LandingScreen
+
+    enum class Sensors(val check: Boolean, val init: Unit)
 }

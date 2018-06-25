@@ -24,6 +24,6 @@ abstract class SensorView : AppCompatActivity() {
     }
 
     private fun initSubview() {
-
+        getSensorView()
     }
 }
