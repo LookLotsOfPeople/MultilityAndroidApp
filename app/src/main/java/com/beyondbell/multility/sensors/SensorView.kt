@@ -6,14 +6,14 @@ import android.hardware.SensorEvent
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
 import android.view.ViewStub
+import com.beyondbell.multility.ActionBarActivity
 import com.beyondbell.multility.R
 import com.beyondbell.multility.Settings
 import com.beyondbell.multility.sensors.AvailableSensorsList.sensorManager
 import kotlinx.android.synthetic.main.sensor.*
 
-abstract class SensorView : AppCompatActivity(), ISensor {
+abstract class SensorView : ActionBarActivity(), ISensor {
 
     @Volatile private var sensorEvent : SensorEvent? = null
 
@@ -60,7 +60,6 @@ abstract class SensorView : AppCompatActivity(), ISensor {
         setContentView(R.layout.sensor)
         setupVisuals()
         initSubview()
-        setupActionBar()
 
         setupTimer()
     }
@@ -73,10 +72,6 @@ abstract class SensorView : AppCompatActivity(), ISensor {
         val viewStub = ViewStub(this@SensorView, getSensorView())
         layout.addView(viewStub)
         viewStub.inflate()
-    }
-
-    private fun setupActionBar() {
-
     }
 
 
