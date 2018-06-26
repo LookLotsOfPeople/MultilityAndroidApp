@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	<item
+		android:id="@+id/options"
+		android:icon="@drawable/ic_settings_black_24dp"
+		android:orderInCategory="0"
+		android:title="@string/options"
+		app:showAsAction="ifRoom"
+		android:onClick="openOptions" />
+
+	<item
+		android:id="@+id/gyroscope"
+		android:onClick="openSensor"
+		android:orderInCategory="1"
+		android:title="@string/gyroscope" />
+
+	<item
+		android:id="@+id/exit"
+		android:icon="@drawable/ic_exit_to_app_black_24dp"
+		android:orderInCategory="2"
+		android:title="@string/quit"
+		app:showAsAction="ifRoom"
+		android:onClick="quitApplication" />
+</menu>
