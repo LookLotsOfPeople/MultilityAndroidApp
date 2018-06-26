@@ -15,7 +15,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainMenu"/>
+        <!--Sensors-->
+        <activity android:name=".sensors.Gyroscope"/>
+        <!--Utilities-->
         <activity android:name=".utilities.Calculator"/>
+
     </application>
 
 </manifest>

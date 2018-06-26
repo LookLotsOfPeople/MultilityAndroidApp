@@ -1,11 +1,14 @@
 package com.beyondbell.multility
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.hardware.SensorManager
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.beyondbell.multility.sensors.AvailableSensorsList
+import com.beyondbell.multility.utilities.AvailableUtilitiesList
 
-class LandingScreen : AppCompatActivity() {
+class LandingScreen : Activity() {
     private val setupThreads = ArrayList<Thread>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,13 +20,20 @@ class LandingScreen : AppCompatActivity() {
     }
 
     private fun checkSensors() {
-        for (sensor in AvailableSensorsList.Sensors.values()) {
+        AvailableSensorsList.sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        AvailableSensorsList.list.clear()
+        for (sensor in AvailableSensorsList.Sensor.values()) {
             if (sensor.check) {
                 AvailableSensorsList.list.add(sensor)
-                val setupThread = Thread(sensor::init)
+                val setupThread = Thread {
+                    sensor.init
+                }
                 setupThreads.add(setupThread)
                 setupThread.start()
             }
+        }
+        for (utility in AvailableUtilitiesList.list) {
+
         }
     }
 
