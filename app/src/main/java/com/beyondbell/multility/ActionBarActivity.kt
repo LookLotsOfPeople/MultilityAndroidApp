@@ -19,7 +19,7 @@ abstract class ActionBarActivity : AppCompatActivity() {
 	}
 
 	private fun setupActionBar() {
-		val actionBar : ActionBar = supportActionBar!!
+		val actionBar: ActionBar = supportActionBar!!
 		actionBar.title = getString(R.string.app_name)
 		actionBar.subtitle = getString(R.string.app_desc)
 	}

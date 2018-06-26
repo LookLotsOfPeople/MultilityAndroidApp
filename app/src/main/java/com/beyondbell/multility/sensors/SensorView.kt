@@ -15,83 +15,85 @@ import kotlinx.android.synthetic.main.sensor.*
 
 abstract class SensorView : ActionBarActivity(), ISensor {
 
-    @Volatile private var sensorEvent : SensorEvent? = null
+	@Volatile
+	private var sensorEvent: SensorEvent? = null
 
-    // Visuals Related
-    abstract fun getSensorView() : Int
+	// Visuals Related
+	abstract fun getSensorView(): Int
 
-    // Sensor Related
-    abstract fun getSensor(sensorManager: SensorManager?): Sensor?
-    abstract fun update(sensorEvent: SensorEvent?)
+	// Sensor Related
+	abstract fun getSensor(sensorManager: SensorManager?): Sensor?
 
-
-    // Sensor Stuff
-
-    override fun check(sensorManager: SensorManager): Boolean {
-	    return getSensor(sensorManager) != null
-    }
-
-    override fun onSensorChanged(sensorEvent: SensorEvent?) {
-        this.sensorEvent = sensorEvent
-    }
+	abstract fun update(sensorEvent: SensorEvent?)
 
 
-    // Sensor Timer
+	// Sensor Stuff
 
-    private val handler : Handler = Handler()
-    private var timer : Runnable? = null
+	override fun check(sensorManager: SensorManager): Boolean {
+		return getSensor(sensorManager) != null
+	}
 
-    private fun setupTimer() {
-        timer = Runnable {
-            if (sensorEvent != null) {
-                update(sensorEvent)
-                handler.postDelayed(timer, Settings.updateInterval)
-            } else {
-                handler.post(timer)
-            }
-        }
-    }
+	override fun onSensorChanged(sensorEvent: SensorEvent?) {
+		this.sensorEvent = sensorEvent
+	}
 
 
-    // Visuals Setup
+	// Sensor Timer
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.sensor)
-        setupVisuals()
-        initSubview()
+	private val handler: Handler = Handler()
+	private var timer: Runnable? = null
 
-        setupTimer()
-    }
-
-    private fun setupVisuals() {
-        sensorName.text = this.javaClass.simpleName
-    }
-
-    private fun initSubview() {
-        val viewStub = ViewStub(this@SensorView, getSensorView())
-        layout.addView(viewStub)
-        viewStub.inflate()
-    }
+	private fun setupTimer() {
+		timer = Runnable {
+			if (sensorEvent != null) {
+				update(sensorEvent)
+				handler.postDelayed(timer, Settings.updateInterval)
+			} else {
+				handler.post(timer)
+			}
+		}
+	}
 
 
-    // Conserves Battery By Registering and Unregistering the Sensor Based on Needs
+	// Visuals Setup
 
-    override fun onResume() {
-        super.onResume()
-        sensorManager?.registerListener(this, getSensor(sensorManager), Settings.updateInterval.toInt())
-        handler.post(timer)
-    }
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		setContentView(R.layout.sensor)
+		setupVisuals()
+		initSubview()
 
-    override fun onPause() {
-        super.onPause()
-        handler.removeCallbacks(timer)
-        val sensorManager: SensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        sensorManager.unregisterListener(this)
-    }
+		setupTimer()
+	}
+
+	private fun setupVisuals() {
+		sensorName.text = this.javaClass.simpleName
+	}
+
+	private fun initSubview() {
+		val viewStub = ViewStub(this@SensorView, getSensorView())
+		layout.addView(viewStub)
+		viewStub.inflate()
+	}
 
 
-    // Unimplemented
+	// Conserves Battery By Registering and Unregistering the Sensor Based on Needs
 
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+	override fun onResume() {
+		super.onResume()
+		sensorManager?.registerListener(this, getSensor(sensorManager), Settings.updateInterval.toInt())
+		handler.post(timer)
+	}
+
+	override fun onPause() {
+		super.onPause()
+		handler.removeCallbacks(timer)
+		val sensorManager: SensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+		sensorManager.unregisterListener(this)
+	}
+
+
+	// Unimplemented
+
+	override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 }
