@@ -18,7 +18,6 @@ abstract class SensorView : AppCompatActivity(), ISensor {
     @Volatile private var sensorEvent : SensorEvent? = null
 
     // Visuals Related
-    abstract fun getSensorName() : String
     abstract fun getSensorView() : Int
 
     // Sensor Related
@@ -37,10 +36,22 @@ abstract class SensorView : AppCompatActivity(), ISensor {
     }
 
 
-    // Sensor Thread
+    // Sensor Timer
 
     private val handler : Handler = Handler()
     private var timer : Runnable? = null
+
+    private fun setupTimer() {
+        timer = Runnable {
+            if (sensorEvent != null) {
+                update(sensorEvent)
+                handler.postDelayed(timer, Settings.updateInterval)
+            } else {
+                handler.post(timer)
+            }
+        }
+    }
+
 
     // Visuals Setup
 
@@ -50,10 +61,12 @@ abstract class SensorView : AppCompatActivity(), ISensor {
         setupVisuals()
         initSubview()
         setupActionBar()
+
+        setupTimer()
     }
 
     private fun setupVisuals() {
-        sensorName.text = getSensorName()
+        sensorName.text = this.javaClass.simpleName
     }
 
     private fun initSubview() {
@@ -72,16 +85,6 @@ abstract class SensorView : AppCompatActivity(), ISensor {
     override fun onResume() {
         super.onResume()
         sensorManager?.registerListener(this, getSensor(sensorManager), Settings.updateInterval.toInt())
-        if (timer == null) {
-            timer = Runnable {
-                if (sensorEvent != null) {
-                    update(sensorEvent)
-                    handler.postDelayed(timer, Settings.updateInterval)
-                } else {
-                    handler.post(timer)
-                }
-            }
-        }
         handler.post(timer)
     }
 

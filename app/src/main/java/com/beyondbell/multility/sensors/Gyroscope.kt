@@ -2,23 +2,24 @@ package com.beyondbell.multility.sensors
 
 import android.annotation.SuppressLint
 import android.hardware.Sensor
+import android.hardware.Sensor.TYPE_GYROSCOPE
 import android.hardware.SensorEvent
 import android.hardware.SensorManager
 import com.beyondbell.multility.R
 import kotlinx.android.synthetic.main.xyz.*
 
 class Gyroscope : SensorView() {
-
-    // Sensor
+    override fun getSensor(sensorManager: SensorManager?): Sensor? {
+        return sensorManager?.getDefaultSensor(TYPE_GYROSCOPE)
+    }
 
     override fun init() {
         // TODO Check for Permission to Use Sensor
     }
 
-    override fun getSensor(sensorManager: SensorManager?): Sensor? {
-        return sensorManager?.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+    override fun getSensorView(): Int {
+        return R.layout.xyz
     }
-
 
     @SuppressLint("SetTextI18n")
     override fun update(sensorEvent: SensorEvent?) {
@@ -34,13 +35,4 @@ class Gyroscope : SensorView() {
     }
 
 
-    // Visual
-
-    override fun getSensorName(): String {
-        return "Gyroscope"
-    }
-
-    override fun getSensorView(): Int {
-        return R.layout.xyz
-    }
 }
