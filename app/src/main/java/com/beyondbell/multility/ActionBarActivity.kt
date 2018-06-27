@@ -24,11 +24,11 @@ abstract class ActionBarActivity : AppCompatActivity() {
 		actionBar.subtitle = getString(R.string.app_desc)
 	}
 
-	fun openOptions(menuItem: MenuItem?) {
+	fun openSettings(menuItem: MenuItem?) {
 
 	}
 
-	fun quitApplication(menuItem: MenuItem?) {
+	fun returnToMainMenu(menuItem: MenuItem?) {
 		finishAndRemoveTask()
 	}
 

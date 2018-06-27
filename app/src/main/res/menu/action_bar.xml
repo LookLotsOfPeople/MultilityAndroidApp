@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto">
 	<item
-		android:id="@+id/options"
+		android:id="@+id/settings"
 		android:icon="@drawable/ic_settings_black_24dp"
 		android:orderInCategory="0"
-		android:title="@string/options"
+		android:title="@string/settings"
 		app:showAsAction="ifRoom"
-		android:onClick="openOptions" />
+		android:onClick="openSettings" />
 
 	<item
 		android:id="@+id/gyroscope"
@@ -16,10 +16,10 @@
 		android:title="@string/gyroscope" />
 
 	<item
-		android:id="@+id/exit"
+		android:id="@+id/returnToMainMenu"
 		android:icon="@drawable/ic_exit_to_app_black_24dp"
 		android:orderInCategory="2"
-		android:title="@string/quit"
+		android:title="@string/return_to_main_menu"
 		app:showAsAction="ifRoom"
-		android:onClick="quitApplication" />
+		android:onClick="returnToMainMenu" />
 </menu>
