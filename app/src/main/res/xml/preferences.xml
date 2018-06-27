@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:key="preferencescreen" >
+	<SeekBarPreference
+		android:title="Sensor Update Time (Milliseconds)"
+		android:key="delay"
+		android:max="2000"
+		android:defaultValue="100" />
+</PreferenceScreen>

@@ -7,23 +7,23 @@ import android.hardware.SensorManager
 import android.os.Bundle
 import android.os.Handler
 import android.view.ViewStub
-import com.beyondbell.multility.ActionBarActivity
+import com.beyondbell.multility.ComponentActivity
 import com.beyondbell.multility.R
-import com.beyondbell.multility.Settings
 import com.beyondbell.multility.sensors.AvailableSensorsList.sensorManager
 import kotlinx.android.synthetic.main.sensor.*
 
-abstract class SensorView : ActionBarActivity(), ISensor {
+abstract class SensorView : ComponentActivity(), ISensor {
 
 	@Volatile
 	private var sensorEvent: SensorEvent? = null
+	private var delay: Long = 0
+
 
 	// Visuals Related
 	abstract fun getSensorView(): Int
 
 	// Sensor Related
 	abstract fun getSensor(sensorManager: SensorManager?): Sensor?
-
 	abstract fun update(sensorEvent: SensorEvent?)
 
 
@@ -47,11 +47,13 @@ abstract class SensorView : ActionBarActivity(), ISensor {
 		timer = Runnable {
 			if (sensorEvent != null) {
 				update(sensorEvent)
-				handler.postDelayed(timer, Settings.updateInterval)
+				handler.postDelayed(timer, delay)
 			} else {
 				handler.post(timer)
 			}
 		}
+
+		delay = getPreferences(this)?.getInt("delay", 100)!!.toLong()
 	}
 
 
@@ -81,7 +83,7 @@ abstract class SensorView : ActionBarActivity(), ISensor {
 
 	override fun onResume() {
 		super.onResume()
-		sensorManager?.registerListener(this, getSensor(sensorManager), Settings.updateInterval.toInt())
+		sensorManager?.registerListener(this, getSensor(sensorManager), delay.toInt())
 		handler.post(timer)
 	}
 

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.preference.PreferenceManager
 import com.beyondbell.multility.sensors.AvailableSensorsList
 import com.beyondbell.multility.utilities.AvailableUtilitiesList
 
@@ -16,6 +17,7 @@ class LandingScreen : Activity() {
 		setContentView(R.layout.landing)
 		checkSensors()
 		waitForSetup()
+		defaultSettings()
 		openMainMenu()
 	}
 
@@ -45,5 +47,10 @@ class LandingScreen : Activity() {
 
 	private fun openMainMenu() {
 		this@LandingScreen.startActivity(Intent(this@LandingScreen, MainMenu::class.java))
+		finish()
+	}
+
+	private fun defaultSettings() {
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 	}
 }

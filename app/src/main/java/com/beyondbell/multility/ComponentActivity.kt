@@ -1,12 +1,17 @@
 package com.beyondbell.multility
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.beyondbell.multility.settings.Settings
 
-abstract class ActionBarActivity : AppCompatActivity() {
+abstract class ComponentActivity : AppCompatActivity() {
 	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 		val inflater = menuInflater
 		inflater.inflate(R.menu.action_bar, menu)
@@ -14,6 +19,8 @@ abstract class ActionBarActivity : AppCompatActivity() {
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
+
+
 		super.onCreate(savedInstanceState)
 		setupActionBar()
 	}
@@ -25,14 +32,18 @@ abstract class ActionBarActivity : AppCompatActivity() {
 	}
 
 	fun openSettings(menuItem: MenuItem?) {
-
+		this@ComponentActivity.startActivity(Intent(this@ComponentActivity, Settings::class.java))
 	}
 
 	fun returnToMainMenu(menuItem: MenuItem?) {
-		finishAndRemoveTask()
+		finish()
 	}
 
 	fun openSensor(menuItem: MenuItem?) {
 
+	}
+
+	protected fun getPreferences(context: Context): SharedPreferences? {
+		return PreferenceManager.getDefaultSharedPreferences(context)
 	}
 }

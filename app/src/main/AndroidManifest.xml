@@ -8,6 +8,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+        <!--Management-->
         <activity android:name=".LandingScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -15,8 +16,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainMenu"/>
+        <activity android:name=".settings.Settings"/>
         <!--Sensors-->
         <activity android:name=".sensors.Gyroscope"/>
+        <activity android:name=".sensors.Compass"/>
         <!--Utilities-->
         <activity android:name=".utilities.Calculator"/>
 

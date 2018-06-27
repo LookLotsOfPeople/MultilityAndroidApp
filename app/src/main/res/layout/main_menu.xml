@@ -18,11 +18,15 @@
         android:typeface="sans" />
 
     <ScrollView
-        android:id="@+id/componentsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
 
+        <LinearLayout
+            android:id="@+id/componentsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
     </ScrollView>
 
 </LinearLayout>

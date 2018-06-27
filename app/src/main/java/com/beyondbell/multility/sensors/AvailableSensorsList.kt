@@ -9,16 +9,19 @@ object AvailableSensorsList {
 	var sensorManager: SensorManager? = null
 
 	enum class Sensor(classInstance: ISensor) {
-		Gyroscope(Gyroscope());
+		Gyroscope(Gyroscope()), Compass(Compass());
 
 		val check = classInstance.check(AvailableSensorsList.sensorManager!!)
 		val init = classInstance.init()
 	}
 
 	fun createIntent(packageContext: Context, sensor: Sensor): Intent {
-		when (sensor) {
+		return when (sensor) {
 			Sensor.Gyroscope -> {
-				return Intent(packageContext, com.beyondbell.multility.sensors.Gyroscope::class.java)
+				Intent(packageContext, com.beyondbell.multility.sensors.Gyroscope::class.java)
+			}
+			Sensor.Compass -> {
+				Intent(packageContext, com.beyondbell.multility.sensors.Compass::class.java)
 			}
 		}
 	}
