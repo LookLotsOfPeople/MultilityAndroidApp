@@ -23,7 +23,6 @@ class Compass : SensorView() {
     override fun update(sensorEvent: SensorEvent?) {
         val tv1 = findViewById<TextView>(R.id.x3)
         val tv2 = findViewById<TextView>(R.id.x2)
-        tv1.text = "Hello"
         val average = sensorEvent!!.values[0]
         tv2.setText(average.toInt())
         when (average.toInt()) {
