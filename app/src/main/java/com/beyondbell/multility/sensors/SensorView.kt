@@ -7,7 +7,6 @@ import android.hardware.SensorEvent
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.view.ViewStub
 import android.widget.TextView
 import com.beyondbell.multility.ComponentActivity
@@ -27,7 +26,7 @@ abstract class SensorView : ComponentActivity(), ISensor {
 
 	// Sensor Related
 	abstract fun getSensor(sensorManager: SensorManager?): Sensor?
-	abstract fun update(sensorEvent: SensorEvent?)
+	abstract fun update(sensorEvent: SensorEvent)
 
 
 	// Sensor Stuff
@@ -38,25 +37,14 @@ abstract class SensorView : ComponentActivity(), ISensor {
 
 	override fun onSensorChanged(sensorEvent: SensorEvent?) {
 		this.sensorEvent = sensorEvent
+		updateRunnable.run()
 	}
 
-
-	// Sensor Timer
-
-	private val handler: Handler = Handler()
-	private var timer: Runnable? = null
-
-	private fun setupTimer() {
-		timer = Runnable {
-			if (sensorEvent != null) {
-				update(sensorEvent)
-				handler.postDelayed(timer, delay)
-			} else {
-				handler.post(timer)
-			}
+	private val updateRunnable = Runnable {
+		val temp = sensorEvent
+		if (temp != null) {
+			update(temp)
 		}
-
-		delay = getPreferences(this)?.getInt("delay", 100)!!.toLong()
 	}
 
 
@@ -68,8 +56,6 @@ abstract class SensorView : ComponentActivity(), ISensor {
 		setupVisuals()
 		setupProperties()
 		initSubview()
-
-		setupTimer()
 	}
 
 	private fun setupVisuals() {
@@ -114,13 +100,12 @@ abstract class SensorView : ComponentActivity(), ISensor {
 
 	override fun onResume() {
 		super.onResume()
+		delay = getPreferences(this)?.getInt("delay", 100)!!.toLong()
 		sensorManager?.registerListener(this, getSensor(sensorManager), delay.toInt())
-		handler.post(timer)
 	}
 
 	override fun onPause() {
 		super.onPause()
-		handler.removeCallbacks(timer)
 		val sensorManager: SensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 		sensorManager.unregisterListener(this)
 	}

@@ -18,15 +18,9 @@ class Gyroscope : SensorView() {
 	}
 
 	@SuppressLint("SetTextI18n")
-	override fun update(sensorEvent: SensorEvent?) {
-		if (sensorEvent != null) {
-			first.text = "X: " + Math.toDegrees(sensorEvent.values[0].toDouble()).toString()
-			second.text = "Y: " + Math.toDegrees(sensorEvent.values[1].toDouble()).toString()
-			third.text = "Z: " + Math.toDegrees(sensorEvent.values[2].toDouble()).toString()
-		} else {
-			first.text = "X: " + getString(R.string.loading)
-			first.text = "Y: " + getString(R.string.loading)
-			first.text = "Z: " + getString(R.string.loading)
-		}
+	override fun update(sensorEvent: SensorEvent) {
+		first.text = "X: " + Math.toDegrees(sensorEvent.values[0].toDouble()).toString()
+		second.text = "Y: " + Math.toDegrees(sensorEvent.values[1].toDouble()).toString()
+		third.text = "Z: " + Math.toDegrees(sensorEvent.values[2].toDouble()).toString()
 	}
 }

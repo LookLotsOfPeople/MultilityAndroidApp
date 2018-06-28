@@ -5,7 +5,6 @@ import android.hardware.Sensor
 import android.hardware.Sensor.TYPE_MAGNETIC_FIELD
 import android.hardware.SensorEvent
 import android.hardware.SensorManager
-import android.widget.TextView
 import com.beyondbell.multility.R
 
 class Compass : SensorView() {
@@ -18,40 +17,7 @@ class Compass : SensorView() {
 	}
 
 	@SuppressLint("SetTextI18n")
-	override fun update(sensorEvent: SensorEvent?) {
-		if (sensorEvent != null) {
-			val tv1 = findViewById<TextView>(R.id.x3)
-			val tv2 = findViewById<TextView>(R.id.x2)
-			val average = sensorEvent.values[0]
-			tv2.text = average.toString()
-			when (average.toInt()) {
-				0 -> {
-					tv1.text = "North"
-					tv1.text = "East"
-					tv1.text = "South"
-					tv1.text = "West"
-				}
-				90 -> {
-					tv1.text = "East"
-					tv1.text = "South"
-					tv1.text = "West"
-				}
-				180 -> {
-					tv1.text = "South"
-					tv1.text = "West"
-				}
-				270 -> tv1.text = "West"
-			}
-
-			if (average.toInt() > 270 && average < 360) {
-				tv1.text = "North West"
-			} else if (average.toInt() > 180 && average < 270) {
-				tv1.text = "South West"
-			} else if (average.toInt() > 90 && average < 180) {
-				tv1.text = "South East"
-			} else if (average.toInt() > 0 && average < 90) {
-				tv1.text = "North East"
-			}
-		}
+	override fun update(sensorEvent: SensorEvent) {
+		// TODO Placeholder
 	}
 }

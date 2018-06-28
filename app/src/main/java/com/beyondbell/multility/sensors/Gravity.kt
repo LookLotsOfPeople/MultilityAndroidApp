@@ -17,11 +17,9 @@ class Gravity : SensorView() {
 	}
 
 	@SuppressLint("SetTextI18n")
-	override fun update(sensorEvent: SensorEvent?) {
-		if (sensorEvent != null) {
-			first.text = sensorEvent.values[0].toString() + " m/s^2"
-			second.text = sensorEvent.values[1].toString() + " m/s^2"
-			third.text = sensorEvent.values[2].toString() + " m/s^2"
-		}
+	override fun update(sensorEvent: SensorEvent) {
+		first.text = sensorEvent.values[0].toString() + " m/s^2"
+		second.text = sensorEvent.values[1].toString() + " m/s^2"
+		third.text = sensorEvent.values[2].toString() + " m/s^2"
 	}
 }

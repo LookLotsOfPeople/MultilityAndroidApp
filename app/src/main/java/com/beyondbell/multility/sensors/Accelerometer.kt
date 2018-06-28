@@ -17,15 +17,9 @@ class Accelerometer : SensorView() {
 	}
 
 	@SuppressLint("SetTextI18n")
-	override fun update(sensorEvent: SensorEvent?) {
-		if (sensorEvent != null) {
-			first.text = "X: " + sensorEvent.values[0].toString() + "m/s^2"
-			second.text = "Y: " + sensorEvent.values[1].toString() + "m/s^2"
-			third.text = "Z: " + sensorEvent.values[2].toString() + "m/s^2"
-		} else {
-			first.text = "X: " + getString(R.string.loading)
-			first.text = "Y: " + getString(R.string.loading)
-			first.text = "Z: " + getString(R.string.loading)
-		}
+	override fun update(sensorEvent: SensorEvent) {
+		first.text = "X: " + sensorEvent.values[0].toString() + "m/s^2"
+		second.text = "Y: " + sensorEvent.values[1].toString() + "m/s^2"
+		third.text = "Z: " + sensorEvent.values[2].toString() + "m/s^2"
 	}
 }

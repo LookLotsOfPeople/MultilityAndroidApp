@@ -38,7 +38,6 @@ abstract class ComponentActivity : AppCompatActivity() {
 
 	fun openSettings(menuItem: MenuItem?) {
 		this@ComponentActivity.startActivity(Intent(this@ComponentActivity, Settings::class.java))
-		finish()
 	}
 
 	fun returnToMainMenu(menuItem: MenuItem?) {

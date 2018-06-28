@@ -18,12 +18,18 @@
         <activity android:name=".MainMenu"/>
         <activity android:name=".settings.Settings"/>
         <!--Sensors-->
-        <activity android:name=".sensors.Accelerometer"/>
-        <activity android:name=".sensors.AmbientTemperature"/>
-        <activity android:name=".sensors.Gravity"/>
-        <activity android:name=".sensors.Gyroscope"/>
-        <activity android:name=".sensors.Light"/>
-        <activity android:name=".sensors.Compass"/>
+        <activity android:name=".sensors.Accelerometer"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".sensors.AmbientTemperature"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".sensors.Gravity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".sensors.Gyroscope"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".sensors.Light"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".sensors.Compass"
+            android:screenOrientation="portrait"/>
         <!--Utilities-->
         <activity android:name=".utilities.Calculator"/>
 

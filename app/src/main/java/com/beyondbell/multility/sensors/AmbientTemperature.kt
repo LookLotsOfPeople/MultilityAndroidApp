@@ -17,11 +17,9 @@ class AmbientTemperature : SensorView() {
 	}
 
 	@SuppressLint("SetTextI18n")
-	override fun update(sensorEvent: SensorEvent?) {
-		if (sensorEvent != null) {
-			top.text = sensorEvent.values[0].toString() + " C"
-			bottom.text = (sensorEvent.values[0] * 9/5 + 32).toString() + " F"
-		}
+	override fun update(sensorEvent: SensorEvent) {
+		top.text = sensorEvent.values[0].toString() + " C"
+		bottom.text = (sensorEvent.values[0] * 9/5 + 32).toString() + " F"
 	}
 
 	override fun getName() : String {

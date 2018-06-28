@@ -17,9 +17,7 @@ class Light : SensorView() {
 	}
 
 	@SuppressLint("SetTextI18n")
-	override fun update(sensorEvent: SensorEvent?) {
-		if (sensorEvent != null) {
-			text.text = sensorEvent.values[0].toString() + " lx"
-		}
+	override fun update(sensorEvent: SensorEvent) {
+		text.text = sensorEvent.values[0].toString() + " lx"
 	}
 }
