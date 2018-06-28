@@ -9,11 +9,37 @@
 		app:showAsAction="ifRoom"
 		android:onClick="openSettings" />
 
+
+	<item
+		android:id="@+id/accelerometer"
+		android:onClick="openAccelerometer"
+		android:orderInCategory="1"
+		android:title="@string/accelerometer" />
+
+	<item
+		android:id="@+id/ambientTemperature"
+		android:onClick="openAmbientTemperature"
+		android:orderInCategory="1"
+		android:title="@string/ambient_temperature" />
+
+	<item
+		android:id="@+id/gravity"
+		android:onClick="openGravity"
+		android:orderInCategory="1"
+		android:title="@string/gravity" />
+
 	<item
 		android:id="@+id/gyroscope"
-		android:onClick="openSensor"
+		android:onClick="openGyroscope"
 		android:orderInCategory="1"
 		android:title="@string/gyroscope" />
+
+	<item
+		android:id="@+id/light"
+		android:onClick="openLight"
+		android:orderInCategory="1"
+		android:title="@string/light" />
+
 
 	<item
 		android:id="@+id/returnToMainMenu"

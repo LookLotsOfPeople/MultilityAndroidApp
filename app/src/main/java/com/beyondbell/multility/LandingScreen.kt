@@ -7,15 +7,11 @@ import android.hardware.SensorManager
 import android.os.Bundle
 import android.preference.PreferenceManager
 import com.beyondbell.multility.sensors.AvailableSensorsList
-import com.beyondbell.multility.utilities.AvailableUtilitiesList
 
 class LandingScreen : Activity() {
-	private val setupThreads = ArrayList<Thread>()
-
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		checkSensors()
-		waitForSetup()
 		defaultSettings()
 		openMainMenu()
 	}
@@ -27,23 +23,6 @@ class LandingScreen : Activity() {
 			if (sensor.check) {
 				AvailableSensorsList.list.add(sensor)
 			}
-		}
-		for (utility in AvailableUtilitiesList.list) {
-
-		}
-	}
-
-	private fun waitForSetup() {
-		/*
-			val setupThread = Thread {
-				sensor.init
-			}
-			setupThreads.add(setupThread)
-			setupThread.start()
-
-		 */
-		for (setupThread in setupThreads) {
-			setupThread.join()
 		}
 	}
 
