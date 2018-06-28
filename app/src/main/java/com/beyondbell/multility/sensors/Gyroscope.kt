@@ -33,6 +33,4 @@ class Gyroscope : SensorView() {
 			x.text = "Z: " + getString(R.string.loading)
 		}
 	}
-
-
 }
