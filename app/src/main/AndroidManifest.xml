@@ -28,10 +28,22 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".sensors.Light"
             android:screenOrientation="portrait"/>
+        <activity android:name=".sensors.LinearAcceleration"
+            android:screenOrientation="portrait"/>
         <activity android:name=".sensors.Compass"
             android:screenOrientation="portrait"/>
-        <!--Utilities-->
-        <activity android:name=".utilities.Calculator"/>
+        <activity android:name=".sensors.Orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".sensors.Pressure"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".sensors.Proximity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".sensors.RelativeHumidity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".sensors.RotationVector"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".sensors.Temperature"
+            android:screenOrientation="portrait"/>
 
     </application>
 
