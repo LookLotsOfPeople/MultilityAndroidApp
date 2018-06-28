@@ -12,7 +12,23 @@
         android:clickable="false"
         android:text="@string/loading_sensor_name"
         android:textAlignment="center"
-        android:textSize="49sp"
+        android:textSize="50sp"
         android:visibility="visible" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <LinearLayout
+        android:id="@+id/propertiesLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
 
 </LinearLayout>

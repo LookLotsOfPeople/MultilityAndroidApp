@@ -1,12 +1,15 @@
 package com.beyondbell.multility.sensors
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.ViewStub
+import android.widget.TextView
 import com.beyondbell.multility.ComponentActivity
 import com.beyondbell.multility.R
 import com.beyondbell.multility.sensors.AvailableSensorsList.sensorManager
@@ -63,13 +66,41 @@ abstract class SensorView : ComponentActivity(), ISensor {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.sensor)
 		setupVisuals()
+		setupProperties()
 		initSubview()
 
 		setupTimer()
 	}
 
 	private fun setupVisuals() {
-		sensorName.text = this.javaClass.simpleName
+		sensorName.text = getName()
+	}
+
+	open fun getName(): String? {
+		return this.javaClass.simpleName
+	}
+
+	@SuppressLint("SetTextI18n")
+	private fun setupProperties() {
+		val sensor = getSensor(sensorManager)
+
+		if (sensor != null) {
+			addProperty("Resolution: " + sensor.resolution)
+			addProperty("Maximum Range: " + sensor.maximumRange)
+			addProperty("Version: " + sensor.version)
+			addProperty("Vendor: " + sensor.vendor)
+			addProperty("Power: " + sensor.power)
+		}
+	}
+
+	private fun addProperty(text: String) {
+		val textView = TextView(this)
+		textView.text = text
+		textView.textSize = 24F
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+			textView.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+		}
+		propertiesLayout.addView(textView)
 	}
 
 	private fun initSubview() {

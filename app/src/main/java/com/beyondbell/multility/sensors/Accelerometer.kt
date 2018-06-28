@@ -2,15 +2,14 @@ package com.beyondbell.multility.sensors
 
 import android.annotation.SuppressLint
 import android.hardware.Sensor
-import android.hardware.Sensor.TYPE_GYROSCOPE
 import android.hardware.SensorEvent
 import android.hardware.SensorManager
 import com.beyondbell.multility.R
 import kotlinx.android.synthetic.main.triple.*
 
-class Gyroscope : SensorView() {
+class Accelerometer : SensorView() {
 	override fun getSensor(sensorManager: SensorManager?): Sensor? {
-		return sensorManager?.getDefaultSensor(TYPE_GYROSCOPE)
+		return sensorManager?.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 	}
 
 	override fun getSensorView(): Int {
@@ -20,9 +19,9 @@ class Gyroscope : SensorView() {
 	@SuppressLint("SetTextI18n")
 	override fun update(sensorEvent: SensorEvent?) {
 		if (sensorEvent != null) {
-			first.text = "X: " + Math.toDegrees(sensorEvent.values[0].toDouble()).toString()
-			second.text = "Y: " + Math.toDegrees(sensorEvent.values[1].toDouble()).toString()
-			third.text = "Z: " + Math.toDegrees(sensorEvent.values[2].toDouble()).toString()
+			first.text = "X: " + sensorEvent.values[0].toString() + "m/s^2"
+			second.text = "Y: " + sensorEvent.values[1].toString() + "m/s^2"
+			third.text = "Z: " + sensorEvent.values[2].toString() + "m/s^2"
 		} else {
 			first.text = "X: " + getString(R.string.loading)
 			first.text = "Y: " + getString(R.string.loading)

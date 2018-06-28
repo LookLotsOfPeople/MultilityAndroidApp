@@ -14,7 +14,6 @@ class LandingScreen : Activity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setContentView(R.layout.landing)
 		checkSensors()
 		waitForSetup()
 		defaultSettings()
@@ -27,11 +26,6 @@ class LandingScreen : Activity() {
 		for (sensor in AvailableSensorsList.Sensor.values()) {
 			if (sensor.check) {
 				AvailableSensorsList.list.add(sensor)
-				val setupThread = Thread {
-					sensor.init
-				}
-				setupThreads.add(setupThread)
-				setupThread.start()
 			}
 		}
 		for (utility in AvailableUtilitiesList.list) {
@@ -40,6 +34,14 @@ class LandingScreen : Activity() {
 	}
 
 	private fun waitForSetup() {
+		/*
+			val setupThread = Thread {
+				sensor.init
+			}
+			setupThreads.add(setupThread)
+			setupThread.start()
+
+		 */
 		for (setupThread in setupThreads) {
 			setupThread.join()
 		}

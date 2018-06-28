@@ -54,8 +54,4 @@ class Compass : SensorView() {
 			}
 		}
 	}
-
-	override fun init() {
-		//TODO add <uses-feature/> in manifest.xml, voids use of extra method
-	}
 }
